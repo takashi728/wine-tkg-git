@@ -1,0 +1,20 @@
+diff --color -ruN "proton-ge-custom copy/proton" proton-ge-custom/proton
+--- "proton-ge-custom copy/proton"	2026-07-13 19:40:29.137900811 +0200
++++ proton-ge-custom/proton	2026-07-13 19:38:41.636261627 +0200
+@@ -1641,8 +1641,16 @@
+                 "beclient.dll": "b,n",
+                 "beclient_x64.dll": "b,n",
+                 "winebth.sys": "d", #disable winebth.sys as it crashes winedevice.exe
++
++                "winmm": "n,b",
++                "version.dll": "n,b",
++                "reflex.dll": "n,b",
+         }
+ 
++        if "PROTON_DISABLE_LSTEAMCLIENT" not in os.environ:
++            os.environ["PROTON_DISABLE_LSTEAMCLIENT"] = "1"
++            self.env["PROTON_DISABLE_LSTEAMCLIENT"] = "1"
++
+         # CW Bug 21737. Locoland executable happens to be steam.exe.
+         if os.environ.get("SteamGameId", 0) == "352130":
+             del self.dlloverrides["steam.exe"]
